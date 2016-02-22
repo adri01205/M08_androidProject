@@ -9,8 +9,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.adri.m08_androidproject.MainActivity">
 
-    <TextView
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/et_Nickname"
+        android:layout_marginTop="43dp"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/et_password"
+        android:layout_below="@+id/et_Nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:textAlignment="center" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Aceptar"
+        android:id="@+id/bt_Aceptar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar"
+        android:layout_marginTop="53dp"
+        android:max="100"
+        android:indeterminate="false"
+        android:layout_below="@+id/bt_Aceptar"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember user?"
+        android:id="@+id/checkBox"
+        android:layout_below="@+id/et_password"
+        android:layout_centerHorizontal="true"
+        android:checked="true" />
 </RelativeLayout>
