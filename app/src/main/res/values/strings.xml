@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">M08_androidProject</string>
+    <string name="app_name">Appersonal Trinner</string>
+    <string name="register">Sign Up</string>
+    <string name="rememberUser">Remember User?</string>
+    <string name="btn_Accept">Accept</string>
+
 </resources>

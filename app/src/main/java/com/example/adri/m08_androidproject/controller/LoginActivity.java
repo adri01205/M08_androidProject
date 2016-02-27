@@ -1,15 +1,101 @@
 package com.example.adri.m08_androidproject.controller;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.adri.m08_androidproject.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    public static String PREFS_NAME = "FitxerPreferencies";
+    Button aceptar;
+    EditText user;
+    EditText pass;
+    CheckBox recordar;
+    ProgressBar bar;
+    TextView signup;
+    String nom = "";
+    //timer
+    private Handler timerHandler = new Handler();
+    private int seconds = 10, barProg = 1;
+    private Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+
+            if (bar.getProgress() < 100) {
+                long millis = System.currentTimeMillis() - seconds;
+                bar.setProgress(bar.getProgress() + barProg);
+                timerHandler.postDelayed(this, 1);
+                seconds = barProg / 10;
+            } else {
+                System.exit(1);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        aceptar = (Button) findViewById(R.id.bt_Aceptar);
+        user = (EditText) findViewById(R.id.et_Nickname);
+        pass = (EditText) findViewById(R.id.et_password);
+        signup = (TextView) findViewById(R.id.tv_signUp);
+        recordar = (CheckBox) findViewById(R.id.checkBox);
+        bar = (ProgressBar) findViewById(R.id.progressBar);
+        bar.setMax(100);
+
+        signup.setOnClickListener(this);
+        aceptar.setOnClickListener(this);
+
+        SharedPreferences config = getSharedPreferences(PREFS_NAME, 0);
+        //obtenim una preferencia anteriorment grabada
+        nom = config.getString("user", "");
+        user.setText(nom);
+
+    }
+
+    public void aceptar() {
+        SharedPreferences config = getSharedPreferences(PREFS_NAME, 0);
+        //editor per editar les preferencies
+        SharedPreferences.Editor editor = config.edit();
+        if (recordar.isChecked()) {
+            //afegim una preferencia--> (clau=name, valor=pepe)
+            editor.putString("user", String.valueOf(user.getText()));
+            //Confirmar els canvis
+            editor.commit();
+            nom = config.getString("user", null);
+        } else {
+            editor.putString("user", "");
+            nom = config.getString("user", null);
+            editor.commit();
+        }
+        timerHandler.postDelayed(timerRunnable, 0);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
+        switch (v.getId()) {
+            case R.id.bt_Aceptar:
+                aceptar();
+                break;
+            case R.id.tv_signUp:
+                intent = new Intent(this, RegisterActivity.class);
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
     }
 }
