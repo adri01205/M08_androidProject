@@ -23,24 +23,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ProgressBar bar;
     TextView signup;
     String nom = "";
+    Intent intent;
     //timer
     private Handler timerHandler = new Handler();
     private int seconds = 10, barProg = 1;
-    private Runnable timerRunnable = new Runnable() {
 
-        @Override
-        public void run() {
-
-            if (bar.getProgress() < 100) {
-                long millis = System.currentTimeMillis() - seconds;
-                bar.setProgress(bar.getProgress() + barProg);
-                timerHandler.postDelayed(this, 1);
-                seconds = barProg / 10;
-            } else {
-                System.exit(1);
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +52,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void aceptar() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+    }
+
+    /*public void aceptar() {
         SharedPreferences config = getSharedPreferences(PREFS_NAME, 0);
         //editor per editar les preferencies
         SharedPreferences.Editor editor = config.edit();
@@ -81,14 +99,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.commit();
         }
         timerHandler.postDelayed(timerRunnable, 0);
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
         Intent intent = null;
         switch (v.getId()) {
             case R.id.bt_Aceptar:
-                aceptar();
+                //aceptar();
+                intent = new Intent(this, MenuActivity.class);
                 break;
             case R.id.tv_signUp:
                 intent = new Intent(this, RegisterActivity.class);
@@ -98,4 +117,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         }
     }
+
+    /*private Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+
+            if (bar.getProgress() < 100) {
+                long millis = System.currentTimeMillis() - seconds;
+                bar.setProgress(bar.getProgress() + barProg);
+                timerHandler.postDelayed(this, 1);
+                seconds = barProg / 10;
+            } else {
+
+            }
+        }
+    };*/
 }
