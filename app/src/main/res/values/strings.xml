@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">Appersonal Trinner</string>
+    <string name="app_name" translatable="false">Appersonal Trainer</string>
     <string name="register">Sign Up</string>
     <string name="rememberUser">Remember User?</string>
     <string name="btn_Accept">Accept</string>
+    <string name="newRace">New Race</string>
+    <string name="History">History</string>
+    <string name="Logout">Log Out</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
 
 </resources>

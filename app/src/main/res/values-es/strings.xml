@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Appersonal Trinner</string>
     <string name="btn_Accept">Aceptar</string>
     <string name="register">Registrar</string>
     <string name="rememberUser">Recordar Usuario?</string>
+    <string name="History">Historial</string>
+    <string name="Logout">Entrar con otro usuario</string>
+    <string name="cancel">Cancelar</string>
+    <string name="newRace">Nueva Carrera</string>
+    <string name="save">Guardar</string>
 </resources>
