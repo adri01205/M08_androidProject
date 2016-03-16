@@ -11,12 +11,12 @@ import com.example.adri.m08_androidproject.model.business.User;
 /**
  * Created by Sergio on 28/02/2016.
  */
-public class UsuariConversor {
-    public static final String BD_NAME = "TRINEER_BD";
-    private UsuarisSqliteHelper helper;
+public class UserConversor {
+    public static final String BD_NAME = "TRINEER_BD3";
+    private UserSqliteHelper helper;
 
 
-    public UsuariConversor(UsuarisSqliteHelper helper) {
+    public UserConversor(UserSqliteHelper helper) {
         this.helper = helper;
     }
 
@@ -66,7 +66,18 @@ public class UsuariConversor {
 //            null /* orderBy */
 //            );
 
-    public Cursor getUsersByName(String name) {
+    public User getUsers(String name) {
+        if(name.trim().equals("")){
+            return null;
+        }
+        Cursor c = getCursorUsersByName(name);
+        c.moveToFirst();
+
+
+        return new User(c.getInt(c.getColumnIndex("id")),c.getString(c.getColumnIndex("name")));
+    }
+
+    public Cursor getCursorUsersByName(String name) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         return db.query(true,

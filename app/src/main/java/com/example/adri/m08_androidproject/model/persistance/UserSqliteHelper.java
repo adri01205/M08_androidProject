@@ -7,32 +7,26 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Sergio on 28/02/2016.
  */
-public class UsuarisSqliteHelper extends SQLiteOpenHelper {
+public class UserSqliteHelper extends SQLiteOpenHelper {
 
-    String sqlCreate = "CREATE TABLE user " +
-            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            " name TEXT NOT NULL ) " +
+    String sqlCreate1 = "CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT,  name TEXT NOT NULL );";
+    String sqlCreate2 = "CREATE TABLE run (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  run_time TEXT NOT NULL,  id_user INTEGER NOT NULL, FOREIGN KEY(id_user) REFERENCES user(id));";
 
-            "CREATE TABLE run " +
-            "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            " time TEXT NOT NULL, " +
-            " id_user INTEGER NOT NULL, " +
-            "FOREIGN KEY(id_user) REFERENCES user(id) )" ;
-
-    public UsuarisSqliteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public UserSqliteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(sqlCreate);
+        db.execSQL(sqlCreate1);
+        db.execSQL(sqlCreate2);
 
         db.execSQL(
                 "INSERT INTO user (id, name) " +
-                        "VALUES (1, 'test')");
+                        "VALUES (1, 'test');");
         db.execSQL(
-                "INSERT INTO run (id, time, id_user) " +
-                        "VALUES (1, 'test', 1)");
+                "INSERT INTO run (id, run_time, id_user) " +
+                        "VALUES (1, 'test', 1);");
 
     }
 
@@ -44,6 +38,7 @@ public class UsuarisSqliteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS run");
 
-        db.execSQL(sqlCreate);
+        db.execSQL(sqlCreate1);
+        db.execSQL(sqlCreate2);
     }
 }

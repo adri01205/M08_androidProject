@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.adri.m08_androidproject.R;
+import com.example.adri.m08_androidproject.model.persistance.UserConversor;
+import com.example.adri.m08_androidproject.model.persistance.UserSqliteHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static String PREFS_NAME = "FitxerPreferencies";
@@ -50,6 +52,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         nom = config.getString("user", "");
         user.setText(nom);
 
+//        UserSqliteHelper ushelper = new UserSqliteHelper(this, UserConversor.BD_NAME , null, 2);
+//        UserConversor uc = new UserConversor(ushelper);
+//        System.out.println(uc.getUsers("test").getName());
     }
 
     @Override
