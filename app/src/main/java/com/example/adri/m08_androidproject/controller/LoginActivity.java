@@ -52,9 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         nom = config.getString("user", "");
         user.setText(nom);
 
-//        UserSqliteHelper ushelper = new UserSqliteHelper(this, UserConversor.BD_NAME , null, 2);
-//        UserConversor uc = new UserConversor(ushelper);
-//        System.out.println(uc.getUsers("test").getName());
     }
 
     @Override

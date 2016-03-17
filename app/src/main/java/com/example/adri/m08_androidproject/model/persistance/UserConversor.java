@@ -1,5 +1,6 @@
 package com.example.adri.m08_androidproject.model.persistance;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,12 +13,13 @@ import com.example.adri.m08_androidproject.model.business.User;
  * Created by Sergio on 28/02/2016.
  */
 public class UserConversor {
-    public static final String BD_NAME = "TRINEER_BD3";
+    public static final String BD_NAME = "TRINEER_BD4";
+    public static final int BD_VERSION = 3;
     private UserSqliteHelper helper;
 
 
-    public UserConversor(UserSqliteHelper helper) {
-        this.helper = helper;
+    public UserConversor(Activity context) {
+        this.helper = new UserSqliteHelper(context, UserConversor.BD_NAME , null, UserConversor.BD_VERSION);
     }
 
 
@@ -43,7 +45,8 @@ public class UserConversor {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues dades = new ContentValues();
 
-        dades.put("time", run.getTemps());
+        dades.put("run_time", run.getRun_time());
+        dades.put("run_date", run.getRun_date());
         dades.put("id_user", run.getId_user());
 
 
@@ -56,25 +59,17 @@ public class UserConversor {
         return index;
     }
 
-//    (SQliteDatabase) db.query(
-//              "mytable" /* table */,
-//            new String[] { "name" } /* columns */,
-//            "id = ?" /* where or selection */,
-//            new String[] { "john" } /* selectionArgs i.e. value to replace ? */,
-//            null /* groupBy */,
-//            null /* having */,
-//            null /* orderBy */
-//            );
-
     public User getUsers(String name) {
         if(name.trim().equals("")){
             return null;
         }
         Cursor c = getCursorUsersByName(name);
+
+        if(c==null && c.getCount()==0){
+            return null;
+        }
         c.moveToFirst();
-
-
-        return new User(c.getInt(c.getColumnIndex("id")),c.getString(c.getColumnIndex("name")));
+        return new User(c.getInt(0),c.getString(1));
     }
 
     public Cursor getCursorUsersByName(String name) {
@@ -91,15 +86,34 @@ public class UserConversor {
                 null);
     }
 
-
-    public Cursor getAllRuns() {
+    public Cursor getCursorRunsByUser(User user) {
         SQLiteDatabase db = helper.getReadableDatabase();
+        return db.query(true,
+                "run",
+                new String[]{"id", "run_time", "run_date", "id_user"},
+                "id_user = ?",
+                new String[] { user.getId() + "" },
+                null,
+                null,
+                null,
+                "run_date");
+    }
+
+    public Cursor getCursorRunsByUser(String userName) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        User user = this.getUsers(userName);
+        int id;
+        if(user != null) {
+             id = user.getId();
+        }else{
+            id = 0;
+        }
 
         return db.query(true,
-                "Tasks",
-                new String[]{"TaskID","Date","TeamID","Report","Company"},
-                null,
-                null,
+                "run",
+                new String[]{"id", "run_time", "run_date", "id_user"},
+                "id_user = ?",
+                new String[] { id + "" },
                 null,
                 null,
                 null,

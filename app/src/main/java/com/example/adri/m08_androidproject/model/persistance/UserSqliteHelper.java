@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class UserSqliteHelper extends SQLiteOpenHelper {
 
     String sqlCreate1 = "CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT,  name TEXT NOT NULL );";
-    String sqlCreate2 = "CREATE TABLE run (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  run_time TEXT NOT NULL,  id_user INTEGER NOT NULL, FOREIGN KEY(id_user) REFERENCES user(id));";
+    String sqlCreate2 = "CREATE TABLE run (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  run_time TEXT NOT NULL, run_date TEXT NOT NULL ,  id_user INTEGER NOT NULL, FOREIGN KEY(id_user) REFERENCES user(id));";
 
     public UserSqliteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -25,8 +25,8 @@ public class UserSqliteHelper extends SQLiteOpenHelper {
                 "INSERT INTO user (id, name) " +
                         "VALUES (1, 'test');");
         db.execSQL(
-                "INSERT INTO run (id, run_time, id_user) " +
-                        "VALUES (1, 'test', 1);");
+                "INSERT INTO run (id, run_time, run_date, id_user) " +
+                        "VALUES (1, 'test', 'test', 1);");
 
     }
 

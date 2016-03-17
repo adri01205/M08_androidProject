@@ -40,6 +40,13 @@ public class MenuActivity extends Activity implements View.OnClickListener {
             case R.id.btn_newrace:
                 intent = new Intent(this, ChronoActivity.class);
                 break;
+            case R.id.btn_history:
+                intent = new Intent(this, HistoryActivity.class);
+                break;
+            case R.id.btn_logout:
+                intent = new Intent(this, LoginActivity.class);
+                break;
+
 
         }
         if (intent != null) {
