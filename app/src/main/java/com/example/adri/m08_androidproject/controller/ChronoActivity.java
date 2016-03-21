@@ -2,12 +2,14 @@ package com.example.adri.m08_androidproject.controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.adri.m08_androidproject.R;
 
@@ -16,6 +18,7 @@ import com.example.adri.m08_androidproject.R;
  */
 public class ChronoActivity extends Activity implements View.OnClickListener {
 
+    int hola;
     TextView minute, second;
     ImageButton startStop;
     Button cancel, save;
@@ -60,37 +63,6 @@ public class ChronoActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-    }
-
-    @Override
     public void onClick(View v) {
         Intent intent;
         if (v.getId() == R.id.btn_save) {
@@ -111,4 +83,70 @@ public class ChronoActivity extends Activity implements View.OnClickListener {
         }
 
     }
+
+//    public class TascaAsincrona extends AsyncTask<Void, Integer, Boolean>
+//    {
+//
+//        /**
+//         * S'executarà abans del codi principal de la nostra tasca. Es sol utilitzar
+//         *  per preparar l'execució de la tasca, inicialitzar la interfície, etc.
+//         */
+//        @Override
+//        protected void onPreExecute() {
+//            barraProgres.setMax(100);
+//            barraProgres.setProgress(0);
+//        }
+//
+//
+//        /**
+//         *  Contindrà el codi principal de la nostra tasca
+//         */
+//        @Override
+//        protected Boolean doInBackground(Void... params) {
+//            try {
+//                while(true){
+//
+//                    Thread.sleep(1);
+//                    publishProgress(1);
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return true;
+//        }
+//
+//        /**
+//         * S'executarà cada vegada que cridem al mètode publishProgress()
+//         * des del mètode doInBackground () .
+//         */
+//        @Override
+//        protected void onProgressUpdate(Integer... values) {
+//            int progreso = values[0].intValue();
+//
+//            barraProgres.setProgress(progreso);
+//        }
+//
+//
+//        /**
+//         *  S'executarà quan finalitzi la nostra tasca, o sigui, després de la
+//         *  finalització del mètode doInBackground () .
+//         */
+//        @Override
+//        protected void onPostExecute(Boolean result) {
+//            if(result)
+//                Toast.makeText(ChronoActivity.this, "Tasca finalitzada!",
+//                        Toast.LENGTH_SHORT).show();
+//        }
+//
+//        /**
+//         *  S'executarà quan es cancel·li l'execució de la tasca abans de la seva
+//         *  finalització normal.
+//         */
+//        @Override
+//        protected void onCancelled() {
+//            Toast.makeText(ChronoActivity.this, "Tasca cancelada!",
+//                    Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
