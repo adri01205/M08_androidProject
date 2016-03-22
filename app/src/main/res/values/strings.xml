@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Appersonal Trainer</string>
+    <string name="app_name" translatable="false">TrainU</string>
     <string name="register">Sign Up</string>
     <string name="rememberUser">Remember User?</string>
     <string name="btn_Accept">Accept</string>
