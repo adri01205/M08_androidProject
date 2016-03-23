@@ -20,34 +20,13 @@ import com.example.adri.m08_androidproject.controller.service.CronoService;
  */
 public class ChronoActivity extends Activity implements View.OnClickListener {
 
+    public static final String ACTION_SHARE_TIME = "time", ACTION_STARTSTOP = "startStop";
     TextView minute, second;
     ImageButton startStop;
     Button cancel, save;
     Boolean stoped = true;
     Intent intentChronoService;
 
-    /*
-        //timer
-        private Handler timerHandler = new Handler();
-        private int seconds = 00, min = 00;
-        private Runnable timerRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-
-                if (stoped == false) {
-                    seconds++;
-                    second.setText(String.valueOf(seconds));
-                    minute.setText(String.valueOf(min));
-                    if (seconds == 59) {
-                        seconds = 00;
-                        min++;
-                    }
-                    timerHandler.postDelayed(this, 1000);
-                }
-            }
-        };
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +46,7 @@ public class ChronoActivity extends Activity implements View.OnClickListener {
         startService(intentChronoService); //Iniciar servicio
 
         // Filtro de acciones que serán alertadas
-        IntentFilter filter = new IntentFilter("time");
+        IntentFilter filter = new IntentFilter(ACTION_SHARE_TIME);
         filter.addAction("seconds");
         filter.addAction("minutes");
 
@@ -121,16 +100,18 @@ public class ChronoActivity extends Activity implements View.OnClickListener {
             startActivity(new Intent(this, MenuActivity.class));
 
         } else if (v.getId() == R.id.ibtn_startStop) { //////////////////////////////////////////////TO DO Stop and Start time in Service  when button is clicked
-            if (stoped == true) {
+            Intent localIntent = new Intent(ACTION_STARTSTOP);
+            if (stoped) {
                 stoped = false;
                 startStop.setImageResource(R.mipmap.stop);
-
-
-                //timerHandler.postDelayed(timerRunnable, 0);
+                localIntent.putExtra("startStop", stoped);
             } else {
                 stoped = true;
                 startStop.setImageResource(R.mipmap.start);
+                localIntent.putExtra("startStop", stoped);
             }
+            // Emitir el intent a la actividad
+            LocalBroadcastManager.getInstance(ChronoActivity.this).sendBroadcast(localIntent);
         }
     }
 
@@ -146,7 +127,7 @@ public class ChronoActivity extends Activity implements View.OnClickListener {
         public void onReceive(Context context, Intent intent) {
 
             switch (intent.getAction()) {
-                case "time":
+                case ACTION_SHARE_TIME:
                     second.setText(intent.getStringExtra("seconds"));
                     minute.setText(intent.getStringExtra("minutes"));
                     break;
