@@ -19,4 +19,6 @@ public class HistoryActivity extends Activity {
         ((Spinner)findViewById(R.id.spinner)).setAdapter(new RunsAdapter(this,reg));
         */
     }
+
+
 }
