@@ -20,7 +20,11 @@
         android:layout_marginTop="43dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textAlignment="center" />
+        android:maxLength="15"
+        android:textAlignment="center"
+        android:textColor="#2c2b2b"
+        android:textColorHint="#FF2C2B2B"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/et_password"
@@ -31,28 +35,18 @@
         android:layout_marginTop="59dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:textAlignment="center" />
+        android:maxLength="8"
+        android:textAlignment="center"
+        android:textColor="#FF2C2B2B" />
 
     <Button
         android:id="@+id/bt_Aceptar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_signUp"
+        android:layout_below="@+id/checkBox"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="69dp"
         android:text="@string/btn_Accept" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="47dp"
-        android:indeterminate="false"
-        android:max="100" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -61,15 +55,16 @@
         android:layout_below="@+id/et_password"
         android:layout_centerHorizontal="true"
         android:checked="true"
-        android:text="@string/rememberUser" />
+        android:text="@string/rememberUser"
+        android:textColor="#4f4e4e" />
 
     <TextView
         android:id="@+id/tv_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/checkBox"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="44dp"
         android:text="@string/register"
         android:textSize="20dp" />
 </RelativeLayout>
